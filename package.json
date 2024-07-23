@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tarikhagustia/notulen": "^1.2.0",
+    "bufferutil": "^4.0.8",
     "flowbite": "^2.4.1",
     "flowbite-react": "^0.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "utf-8-validate": "^6.0.4",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "devDependencies": {

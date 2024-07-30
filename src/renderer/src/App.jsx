@@ -20,8 +20,8 @@ function App() {
 
   return (
     <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
+      {/* <img alt="logo" className="logo" src={electronLogo} /> */}
+      <div className="bg-orange-500">Powered by electron-vite</div>
       <div className="text">
         Build an Electron app with <span className="react">React</span>
       </div>

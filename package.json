@@ -23,7 +23,8 @@
     "@tarikhagustia/notulen": "1.4.1",
     "browserify-fs": "^1.0.0",
     "constants-browserify": "^1.0.0",
-    "events": "^3.3.0"
+    "events": "^3.3.0",
+    "flowbite": "^2.4.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

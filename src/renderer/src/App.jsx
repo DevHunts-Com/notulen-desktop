@@ -1,23 +1,41 @@
-import Versions from './components/Versions'
-// import electronLogo from './assets/electron.svg'
 import 'flowbite'
+import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 function App() {
 
-  const handleOnSubmit = async () => {
-    console.log('tes 1')
+  const [result, setResult] = useState();
+  const [inputValue, setInputValue] = useState({
+    name: '',
+    meet_url: '',
+    gemini_api_key: ''
+  })
+
+  const handleChange = (e) => {
+    const key = e.target.id;
+    const value = e.target.value;
+    setInputValue((prev) => ({ ...prev, [key]: value }));
+  }
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault()
     const config = {
-      debug: true,
-      name: 'tess name',
-      googleMeetUrl: 'https://meet.google.com/hwn-cwkt-sza',
+      debug: false,
+      name: inputValue.name,
+      googleMeetUrl: inputValue.meet_url,
       language: "id-ID",
-      geminiApiKey: 'AIzaSyC6jfxBUCTV6LBcxYUdPnHU0gfQI81oXV8',
+      geminiApiKey: inputValue.gemini_api_key,
       recordingLocation: './out',
       prompt: 'Kamu adalah seorang Asisten Note Takker...'
     }
     const response = await window.api.startNotulen(config)
-    console.log('Notulen response:', response)
+    console.log('Notulen response:', response);
+    setResult(response);
   }
+
+  useEffect(() => {
+    console.log('this result: ', result);
+  }, [result]);
 
   return (
     <>
@@ -29,7 +47,7 @@ function App() {
               <div>
                 <label htmlFor="name">Name</label>
                 <input
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   type="text"
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
@@ -40,7 +58,7 @@ function App() {
               <div>
                 <label htmlFor="meet_url">Url Meet</label>
                 <input
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   type="text"
                   id="meet_url"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
@@ -51,7 +69,7 @@ function App() {
               <div>
                 <label htmlFor="gemini_api_key">Gemini Api Key</label>
                 <input
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   type="text"
                   id="gemini_api_key"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
@@ -66,103 +84,16 @@ function App() {
                 Start
               </button>
             </form>
-            {/* {result && (
-              <div>
-                <h3>Summary:</h3>
-                <p>{result.summary}</p>
+            {result && (
+              <div className="mt-4">
+                <h3 className="text-lg font-semibold">Summary:</h3>
+                <ReactMarkdown>{result.summary}</ReactMarkdown>
               </div>
-            )} */}
+            )}
           </div>
         </div>
       </div>
     </div>
-      {/* <img alt="logo" className="logo" src={electronLogo} />
-      <div className="bg-orange-500">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-      </div>
-
-
-
-      <div className="relative overflow-x-auto">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                      <th scope="col" className="px-6 py-3">
-                          Product name
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                          Color
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                          Category
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                          Price
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          Apple MacBook Pro 17"
-                      </th>
-                      <td className="px-6 py-4">
-                          Silver
-                      </td>
-                      <td className="px-6 py-4">
-                          Laptop
-                      </td>
-                      <td className="px-6 py-4">
-                          $2999
-                      </td>
-                  </tr>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          Microsoft Surface Pro
-                      </th>
-                      <td className="px-6 py-4">
-                          White
-                      </td>
-                      <td className="px-6 py-4">
-                          Laptop PC
-                      </td>
-                      <td className="px-6 py-4">
-                          $1999
-                      </td>
-                  </tr>
-                  <tr className="bg-white dark:bg-gray-800">
-                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          Magic Mouse 2
-                      </th>
-                      <td className="px-6 py-4">
-                          Black
-                      </td>
-                      <td className="px-6 py-4">
-                          Accessories
-                      </td>
-                      <td className="px-6 py-4">
-                          $99
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-
-
-      <button onClick={start}>click here</button>
-
-      <Versions></Versions> */}
     </>
   )
 }

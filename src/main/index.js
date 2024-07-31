@@ -54,14 +54,15 @@ app.whenReady().then(() => {
       const client = new Notulen(config)
       await client.listen()
 
-      client.on("end", (result) => {
-        console.log("Summary:");
-        console.log(result.summary);
-  
-        process.exit(0);
+      return new Promise((resolve, reject) => {
+        client.on("end", (result) => {
+          resolve(result);
+        });
+        
+        client.on("error", (error) => {
+          reject(error);
+        });
       });
-      
-      return { success: true }
     } catch (error) {
       console.error('Failed to start Notulen:', error)
       return { success: false, error: error.message }

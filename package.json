@@ -10,12 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
-    "build": "electron-vite build",
+    "build": "node stream-extension.js && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "npm run build && electron-builder --win",
-    "build:mac": "npm run build && electron-builder --mac",
-    "build:linux": "npm run build && electron-builder --linux"
+    "build:unpack": "node stream-extension.js && npm run build && electron-builder --dir",
+    "build:win": "node stream-extension.js && npm run build && electron-builder --win",
+    "build:mac": "node stream-extension.js && npm run build && electron-builder --mac",
+    "build:linux": "node stream-extension.js && npm run build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -24,7 +24,8 @@
     "browserify-fs": "^1.0.0",
     "constants-browserify": "^1.0.0",
     "events": "^3.3.0",
-    "flowbite": "^2.4.1"
+    "flowbite": "^2.4.1",
+    "react-markdown": "^9.0.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

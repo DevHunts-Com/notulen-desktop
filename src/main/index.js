@@ -14,7 +14,8 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      contextIsolation: true,
+      sandbox: false,
     }
   })
 
@@ -52,7 +53,9 @@ app.whenReady().then(() => {
   ipcMain.handle('start-notulen', async (event, config) => {
     try {
       const client = new Notulen(config)
-      await client.listen()
+      await client.listen({
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
 
       return new Promise((resolve, reject) => {
         client.on("end", (result) => {

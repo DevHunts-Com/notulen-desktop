@@ -34,7 +34,7 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('this result: ', result);
+    // console.log('this result: ', result);
   }, [result]);
 
   return (

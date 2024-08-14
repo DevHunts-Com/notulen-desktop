@@ -20,7 +20,7 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "@tarikhagustia/notulen": "1.4.1",
+    "@tarikhagustia/notulen": "^1.4.1",
     "browserify-fs": "^1.0.0",
     "constants-browserify": "^1.0.0",
     "events": "^3.3.0",

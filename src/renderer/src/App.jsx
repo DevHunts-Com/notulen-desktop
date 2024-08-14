@@ -26,7 +26,21 @@ function App() {
       language: "id-ID",
       geminiApiKey: inputValue.gemini_api_key,
       recordingLocation: './out',
-      prompt: 'Kamu adalah seorang Asisten Note Takker...'
+      prompt: 'Kamu adalah seorang Asisten Note Takker...',
+      recordMeeting: true,
+      streamConfig: {
+        audio: true,
+        video: true,
+        audioBitsPerSecond: 128000, // 128kbps
+        videoBitsPerSecond: 2500000, // 2.5Mbps
+        videoConstraints: {
+          mandatory: {
+            width: { max: 1280 },
+            height: { max: 720 },
+            frameRate: { max: 15 },
+          },
+        },
+      },
     }
     const response = await window.api.startNotulen(config)
     console.log('Notulen response:', response);
